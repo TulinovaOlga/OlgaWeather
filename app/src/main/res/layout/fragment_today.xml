@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TodayWeatherFragment">
+
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/text_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view"
+        tools:text="Minsk, Belarus" />
+
+    <TextView
+        android:id="@+id/text_main_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_location"
+        tools:text="-1 | Snowy" />
+
+
+    <TextView
+        android:id="@+id/text_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:drawableTopCompat="@drawable/ic_humidity"
+
+        app:layout_constraintEnd_toStartOf="@+id/text_rain_mm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_rain_mm"
+        tools:text="30%" />
+
+    <TextView
+        android:id="@+id/text_rain_mm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:drawableTopCompat="@drawable/ic_rain_level"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_main_info"
+        tools:text="1.0 mm" />
+
+    <TextView
+        android:id="@+id/text_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:drawableTopCompat="@drawable/ic_barometer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_rain_mm"
+        app:layout_constraintTop_toTopOf="@+id/text_rain_mm"
+        tools:text="1019 hPa" />
+
+    <TextView
+        android:id="@+id/text_wind_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:drawableTopCompat="@drawable/ic_wind"
+        app:layout_constraintEnd_toStartOf="@+id/text_rain_mm"
+        app:layout_constraintStart_toEndOf="@+id/text_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/text_rain_mm"
+        tools:text="20 km/h" />
+
+    <TextView
+        android:id="@+id/text_wind_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:drawableTopCompat="@drawable/ic_wind_direction"
+        app:layout_constraintEnd_toStartOf="@+id/text_pressure"
+        app:layout_constraintStart_toEndOf="@+id/text_rain_mm"
+        app:layout_constraintTop_toBottomOf="@+id/text_rain_mm"
+        tools:text="NW" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

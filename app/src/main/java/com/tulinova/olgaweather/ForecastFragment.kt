@@ -1,0 +1,20 @@
+package com.tulinova.olgaweather
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+
+
+class ForecastFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        bundle: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_forecast, container, false)
+    }
+
+}
