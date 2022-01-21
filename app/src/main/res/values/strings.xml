@@ -3,4 +3,7 @@
     <string name="tab_today_title">Today</string>
     <string name="tab_forecast_title">Forecast</string>
     <string name="network_error">Network error</string>
+    <string name="share">Share</string>
+    <string name="no_internet_connection">Your network is unavailable. Check your data or wifi connection.</string>
+    <string name="offline">Offline</string>
 </resources>

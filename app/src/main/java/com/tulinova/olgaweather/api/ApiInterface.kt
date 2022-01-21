@@ -8,28 +8,22 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-
 interface ApiInterface {
     @GET("forecast")
-    fun getForecast(@Query("lat")latitude: Double, @Query("lon")longitude: Double, @Query("appid") apiKey:String)
+    suspend fun getForecast(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+        @Query("appid") apiKey: String
+    )
 
     @GET("weather")
-    fun getCurrentWeather(@Query("lat")latitude: Double, @Query("lon")longitude: Double, @Query("appid") apiKey:String) : Call<WeatherResponse>
+    suspend fun getCurrentWeather(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+        @Query("appid") apiKey: String,
+        @Query("units") units: String
+    ): WeatherResponse
 
-    companion object {
-
-        var BASE_URL = "https://api.openweathermap.org/data/2.5/"
-
-        fun create() : ApiInterface {
-
-            val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL)
-                .build()
-            return retrofit.create(ApiInterface::class.java)
-
-        }
-    }
 
 }
 

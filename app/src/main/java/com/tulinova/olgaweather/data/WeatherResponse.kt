@@ -1,12 +1,15 @@
 package com.tulinova.olgaweather.data
 
+import com.google.gson.annotations.SerializedName
+
 
 data class WeatherResponse(
     val weather: List<Weather>,
     val main: Main,
     val wind: Wind,
     val sys: Sys,
-    val name: String
+    val name: String,
+    val rain: Rain
 )
 
 data class Weather(
@@ -33,6 +36,11 @@ data class Main(
 data class Wind(
     val speed: Double,
     val deg: Int
+)
+
+data class Rain(
+    @SerializedName("3h")
+    val rain_in_3h : Double
 )
 
 
