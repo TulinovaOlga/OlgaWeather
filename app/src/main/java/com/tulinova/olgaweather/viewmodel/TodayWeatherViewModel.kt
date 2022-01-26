@@ -7,8 +7,8 @@ import com.tulinova.olgaweather.api.CustomError
 import com.tulinova.olgaweather.api.Event
 import com.tulinova.olgaweather.data.WeatherResponse
 
-private const val API_KEY = "84b26273242b3de0fc7e008873f14fe5"
-private const val METRIC_UNITS = "metric"
+ const val API_KEY = "84b26273242b3de0fc7e008873f14fe5"
+ const val METRIC_UNITS = "metric"
 
 class TodayWeatherViewModel : BaseViewModel() {
 

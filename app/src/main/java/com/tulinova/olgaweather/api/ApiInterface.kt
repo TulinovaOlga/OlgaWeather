@@ -1,5 +1,6 @@
 package com.tulinova.olgaweather.api
 
+import com.tulinova.olgaweather.data.ForecastResponse
 import com.tulinova.olgaweather.data.WeatherResponse
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -13,8 +14,9 @@ interface ApiInterface {
     suspend fun getForecast(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-        @Query("appid") apiKey: String
-    )
+        @Query("appid") apiKey: String,
+        @Query("units") units: String
+    ): ForecastResponse
 
     @GET("weather")
     suspend fun getCurrentWeather(

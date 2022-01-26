@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/todayWeatherFragment">
+    <fragment
+        android:id="@+id/todayWeatherFragment"
+        android:name="com.tulinova.olgaweather.TodayWeatherFragment"
+        android:label="fragment_today"
+         />
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.tulinova.olgaweather.ForecastFragment"
+        android:label="ForecastFragment" />
+</navigation>

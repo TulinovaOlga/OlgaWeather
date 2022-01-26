@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TodayWeatherFragment">
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:drawableTopCompat="@drawable/ic_humidity"
-
+        app:drawableTint="@color/amber_200"
         app:layout_constraintEnd_toStartOf="@+id/text_rain_mm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_rain_mm"
@@ -58,31 +58,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:drawableTopCompat="@drawable/ic_rain_level"
+        app:drawableTopCompat="@drawable/ic_precipitation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_main_info"
+        app:drawableTint="@color/amber_200"
         tools:text="1.0 mm" />
 
     <TextView
         android:id="@+id/text_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:drawableTopCompat="@drawable/ic_barometer"
+        app:drawableTopCompat="@drawable/ic_pressure"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_rain_mm"
         app:layout_constraintTop_toTopOf="@+id/text_rain_mm"
+        app:drawableTint="@color/amber_200"
         tools:text="1019 hPa" />
 
     <TextView
         android:id="@+id/text_wind_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:drawableTopCompat="@drawable/ic_wind2"
+        app:drawableTopCompat="@drawable/ic_wind"
         app:layout_constraintEnd_toStartOf="@+id/text_rain_mm"
         app:layout_constraintStart_toEndOf="@+id/text_humidity"
         app:layout_constraintTop_toBottomOf="@+id/text_rain_mm"
-        tools:text="20 km/h" />
+
+        tools:text="20 km/h"
+        app:drawableTint="@color/amber_200" />
 
     <TextView
         android:id="@+id/text_wind_direction"
@@ -92,6 +96,7 @@
         app:layout_constraintEnd_toStartOf="@+id/text_pressure"
         app:layout_constraintStart_toEndOf="@+id/text_rain_mm"
         app:layout_constraintTop_toBottomOf="@+id/text_rain_mm"
+        app:drawableTint="@color/amber_200"
         tools:text="NW" />
 
     <com.google.android.material.button.MaterialButton
@@ -111,7 +116,7 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="text_humidity,text_pressure,text_wind_direction,text_wind_speed,text_rain_mm,button_share,image_weather_today,text_location,text_main_info" />
 
     <ProgressBar

@@ -10,16 +10,15 @@ import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.button.MaterialButton
-import com.squareup.picasso.Picasso
 import com.tulinova.olgaweather.api.CustomError
 import com.tulinova.olgaweather.api.Status
 import com.tulinova.olgaweather.data.WeatherResponse
+import com.tulinova.olgaweather.utils.IconsUtil
 import com.tulinova.olgaweather.viewmodel.TodayWeatherViewModel
 import kotlin.math.roundToInt
 
 
-const val STUB_LATITUDE = 53.89
-const val STUB_LONGITUDE = 27.56
+
 
 class TodayWeatherFragment : Fragment() {
 
@@ -42,7 +41,7 @@ class TodayWeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_today, container, false)
+        val rootView: View = inflater.inflate(R.layout.fragment_today_weather, container, false)
         humidityText = rootView.findViewById(R.id.text_humidity)
         rainLevelText = rootView.findViewById(R.id.text_rain_mm)
         pressureText = rootView.findViewById(R.id.text_pressure)
@@ -80,7 +79,7 @@ class TodayWeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model.getTodayWeather(STUB_LATITUDE, STUB_LONGITUDE)
+        //model.getTodayWeather(STUB_LATITUDE, STUB_LONGITUDE)
         model.todayWeather.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.LOADING -> showLoading()
@@ -100,19 +99,27 @@ class TodayWeatherFragment : Fragment() {
         progressBar.visibility = View.GONE
         mainInfoGroup.visibility = View.VISIBLE
         noInternetGroup.visibility = View.GONE
-        locationText.text = data?.name
+
+        locationText.text = (data?.name + ", " + data?.sys?.country)
         mainInfoText.text =
             ("" + data?.main?.temp?.roundToInt() + "℃ | " + data?.weather?.getOrNull(0)?.main)
         humidityText.text = ("" + data?.main?.humidity + "%")
-        rainLevelText.text = ("" + data?.rain?.rain_in_3h + "mm")
+        if(data?.rain?.rainIn3h != null) {
+            rainLevelText.text = ("${data.rain.rainIn3h} mm")
+        } else if(data?.rain?.rainIn1h != null) {
+            rainLevelText.text = ("${data.rain.rainIn1h} mm")
+        } else if (data?.snow?.snowIn1h != null) {
+            rainLevelText.text = ("" + data?.snow?.snowIn1h + "mm")
+        } else if(data?.snow?.snowIn3h != null) {
+            rainLevelText.text = ("" + data?.snow?.snowIn3h + "mm")
+        }  else {
+            rainLevelText.text = ("0 mm")
+        }
         pressureText.text = ("" + data?.main?.pressure + "hPa")
         windSpeedText.text = ("" + data?.wind?.speed + "m/s")
         windDirectionText.text = (degToCompass(data?.wind?.deg ?: 0))
-        //TODO: add icons from resources/ this is too small
-        if ((data?.weather?.get(0)?.icon) != null)
-            Picasso.get()
-                .load("https://openweathermap.org/img/wn/" + data.weather.getOrNull(0)?.icon + "@2x.png")
-                .into(weatherImage)
+        weatherImage.setImageResource(IconsUtil.getIconResId(data?.weather?.getOrNull(0)?.icon))
+
 
     }
 

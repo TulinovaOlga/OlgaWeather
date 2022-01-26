@@ -1,4 +1,5 @@
 <resources>
     <dimen name="appbar_padding">16dp</dimen>
     <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
 </resources>
