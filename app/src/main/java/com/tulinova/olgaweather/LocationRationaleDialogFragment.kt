@@ -21,7 +21,7 @@ class LocationRationaleDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.location_permission_rationale))
-            .setPositiveButton(getString(R.string.ok)) { _,_ ->
+            .setPositiveButton(getString(android.R.string.ok)) { _,_ ->
                 listener.onDialogPositiveClick(this)
             }
             .create()

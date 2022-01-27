@@ -13,17 +13,13 @@ interface ApiInterface {
     @GET("forecast")
     suspend fun getForecast(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("appid") apiKey: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): ForecastResponse
 
     @GET("weather")
     suspend fun getCurrentWeather(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("appid") apiKey: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): WeatherResponse
 
 

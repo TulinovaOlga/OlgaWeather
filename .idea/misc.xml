@@ -10,6 +10,7 @@
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_clear_sky_day.xml" value="0.24114583333333334" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_clouds.xml" value="0.1" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_cloudy_day_1.xml" value="0.1" />
+        <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_few_clouds_day.xml" value="0.10234375" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_few_clouds_night.xml" value="0.1" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_humidity.xml" value="0.1265625" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24114583333333334" />
@@ -29,15 +30,17 @@
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/drawable/ic_wind_direction.xml" value="0.1265625" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout-land/fragment_forecast.xml" value="0.17395833333333333" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout-land/fragment_today.xml" value="0.17395833333333333" />
+        <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout-land/fragment_today_weather.xml" value="0.33" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout-port/fragment_today.xml" value="0.225" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/forecast_list_item.xml" value="0.33" />
-        <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/fragment_forecast.xml" value="0.1094224924012158" />
+        <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/fragment_forecast.xml" value="0.21" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/fragment_main.xml" value="0.1094224924012158" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/fragment_today.xml" value="0.25" />
-        <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/fragment_today_weather.xml" value="0.25" />
+        <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/fragment_today_weather.xml" value="0.2" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/item_forecast_list.xml" value="0.1" />
         <entry key="..\:/Projects/OlgaWeather/app/src/main/res/layout/item_forecast_section_header.xml" value="0.1359375" />
+        <entry key="..\:/Projects/OlgaWeather/app/src/main/res/menu/bottom_nav.xml" value="0.225" />
       </map>
     </option>
   </component>

@@ -16,6 +16,10 @@ import com.tulinova.olgaweather.data.WeatherResponse
 import com.tulinova.olgaweather.utils.IconsUtil
 import com.tulinova.olgaweather.viewmodel.TodayWeatherViewModel
 import kotlin.math.roundToInt
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 
 
@@ -73,6 +77,8 @@ class TodayWeatherFragment : Fragment() {
 
         }
 
+        (activity as AppCompatActivity?)?.title = getString(R.string.today)
+
         return rootView
     }
 
@@ -109,9 +115,9 @@ class TodayWeatherFragment : Fragment() {
         } else if(data?.rain?.rainIn1h != null) {
             rainLevelText.text = ("${data.rain.rainIn1h} mm")
         } else if (data?.snow?.snowIn1h != null) {
-            rainLevelText.text = ("" + data?.snow?.snowIn1h + "mm")
+            rainLevelText.text = ("" + data.snow.snowIn1h + "mm")
         } else if(data?.snow?.snowIn3h != null) {
-            rainLevelText.text = ("" + data?.snow?.snowIn3h + "mm")
+            rainLevelText.text = ("" + data.snow.snowIn3h + "mm")
         }  else {
             rainLevelText.text = ("0 mm")
         }

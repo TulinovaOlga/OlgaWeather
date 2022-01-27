@@ -1,7 +1,7 @@
 package com.tulinova.olgaweather.utils
 
 
-import com.tulinova.olgaweather.R;
+import com.tulinova.olgaweather.R
 
 object IconsUtil {
 

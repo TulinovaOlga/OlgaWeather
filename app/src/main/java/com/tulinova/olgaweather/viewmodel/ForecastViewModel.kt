@@ -29,7 +29,7 @@ class ForecastViewModel : BaseViewModel() {
 
     fun getForecastWeather(latitude: Double, longitude: Double) {
         requestWithLiveData(forecastWeather) {
-            api.getForecast(latitude, longitude, API_KEY, METRIC_UNITS)
+            api.getForecast(latitude, longitude)
         }
     }
 

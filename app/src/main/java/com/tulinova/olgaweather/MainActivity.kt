@@ -31,12 +31,12 @@ import com.tulinova.olgaweather.viewmodel.TodayWeatherViewModel
 import android.content.Intent
 
 import android.content.BroadcastReceiver
-import android.content.IntentFilter
+import android.content.IntentFilter import android.widget.Toolbar
 
 
 const val LOG_TAG = "TulinApp"
-const val STUB_LATITUDE = 48.85
-const val STUB_LONGITUDE = 2.35
+const val STUB_LATITUDE = 51.50
+const val STUB_LONGITUDE = -0.11
 
 private const val PERMISSION_ACCESS_COARSE_LOCATION_CODE = 1010
 
@@ -65,8 +65,9 @@ class MainActivity : AppCompatActivity(),
 
         setContentView(R.layout.activity_main)
 
-        val textTitle: TextView = findViewById(R.id.title)
-
+        //val textTitle: TextView = findViewById(R.id.title)
+        val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)

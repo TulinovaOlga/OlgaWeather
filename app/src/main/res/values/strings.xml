@@ -9,6 +9,7 @@
     <string name="turn_on_gps">Please Turn on GPS from settings</string>
     <string name="no_location_permission">No permission granted</string>
     <string name="location_permission_rationale">Please enable location. This is need for getting weather for your real location</string>
-    <string name="ok">Ok</string>
     <string name="updateGPSstatus">UPDATE GPS STATUS!!!</string>
+    <string name="today">Today</string>
+    <string name="forecast">Forecast for 5 days</string>
 </resources>

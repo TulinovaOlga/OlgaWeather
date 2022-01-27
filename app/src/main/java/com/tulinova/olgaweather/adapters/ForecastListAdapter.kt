@@ -12,47 +12,35 @@ import com.tulinova.olgaweather.R
 import com.tulinova.olgaweather.data.ForecastResponse
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 private const val ITEM_VIEW_TYPE_HEADER = 1
 private const val ITEM_VIEW_TYPE_ITEM = 2
 private val timeFormatter: DateFormat = SimpleDateFormat("HH:mm")
+private val dayFormatter: DateFormat = SimpleDateFormat("MM/dd/yyyy")
+private val dayOfWeekFormatter : DateFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
+
 
 class ForecastListAdapter(sourceList: List<ForecastEntry>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var forecastList: List<ForecastListItem>
-    init {
-        var outputFormatter: DateFormat = SimpleDateFormat("MM/dd/yyyy")
-        val groupedList = sourceList.groupBy { outputFormatter.format(it.date) }
-        var myList = ArrayList<ForecastListItem>()
 
+    init {
+        val groupedList = sourceList.groupBy { dayFormatter.format(it.date) }
+        var myList = ArrayList<ForecastListItem>()
         for (i in groupedList.keys) {
             myList.add(ForecastListItem.DayHeader(i))
             for (v in groupedList.getValue(i)) {
                 myList.add(ForecastListItem.ForecastItem(v))
             }
         }
-
-        // myList
-
-
-
-        //withContext(Dispatchers.Main) {
         forecastList = myList
-        //}
-
     }
-
-    fun addHeaderAndSumbitList(list: List<ForecastEntry>) {
-        // adapterScope.launch {
-
-
-
-
-
-
-    }
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -79,7 +67,8 @@ class ForecastListAdapter(sourceList: List<ForecastEntry>) :
         when (holder) {
             is HeaderHolder -> {
                 val item = forecastList.get(position) as ForecastListItem.DayHeader
-                holder.dayNameTextView.text = item.dayName
+                val date : Date = dayFormatter.parse(item.dayName)
+                holder.dayNameTextView.text = dayOfWeekFormatter.format(date)
             }
             is ForecastEntryHolder -> {
                 val item = forecastList.get(position) as ForecastListItem.ForecastItem

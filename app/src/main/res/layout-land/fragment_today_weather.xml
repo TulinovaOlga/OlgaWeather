@@ -12,33 +12,31 @@
         android:id="@+id/image_weather_today"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintWidth_percent="0.300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_cloudy_day_1" />
+
 
     <TextView
         android:id="@+id/text_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_weather_today"
-        tools:text="Minsk, Belarus" />
 
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.050"
+        app:layout_constraintStart_toEndOf="@+id/image_weather_today"
+        app:layout_constraintTop_toTopOf="@+id/image_weather_today"
+        tools:text="Minsk, Belarus" />
 
     <TextView
         android:id="@+id/text_main_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_weather_today"
         app:layout_constraintTop_toBottomOf="@+id/text_location"
         tools:text="-1 | Snowy" />
 
@@ -46,57 +44,53 @@
         android:id="@+id/text_humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:drawableTopCompat="@drawable/ic_humidity"
         app:drawableTint="@color/amber_200"
-        app:layout_constraintEnd_toStartOf="@+id/text_rain_mm"
+        app:drawableTopCompat="@drawable/ic_humidity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_rain_mm"
+        app:layout_constraintTop_toBottomOf="@+id/image_weather_today"
         tools:text="30%" />
 
     <TextView
         android:id="@+id/text_rain_mm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:drawableTopCompat="@drawable/ic_precipitation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_main_info"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.070"
         app:drawableTint="@color/amber_200"
+        app:drawableTopCompat="@drawable/ic_precipitation"
+        app:layout_constraintStart_toEndOf="@+id/text_humidity"
+        app:layout_constraintTop_toTopOf="@+id/text_humidity"
         tools:text="1.0 mm" />
 
     <TextView
         android:id="@+id/text_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:drawableTint="@color/amber_200"
         app:drawableTopCompat="@drawable/ic_pressure"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_rain_mm"
         app:layout_constraintTop_toTopOf="@+id/text_rain_mm"
-        app:drawableTint="@color/amber_200"
         tools:text="1019 hPa" />
 
     <TextView
         android:id="@+id/text_wind_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:drawableTint="@color/amber_200"
         app:drawableTopCompat="@drawable/ic_wind"
-        app:layout_constraintEnd_toStartOf="@+id/text_rain_mm"
-        app:layout_constraintStart_toEndOf="@+id/text_humidity"
-        app:layout_constraintTop_toBottomOf="@+id/text_rain_mm"
 
-        tools:text="20 km/h"
-        app:drawableTint="@color/amber_200" />
+        app:layout_constraintStart_toEndOf="@+id/text_pressure"
+        app:layout_constraintTop_toTopOf="@+id/text_pressure"
+        tools:text="20 km/h" />
 
     <TextView
         android:id="@+id/text_wind_direction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:drawableTopCompat="@drawable/ic_wind_direction"
-        app:layout_constraintEnd_toStartOf="@+id/text_pressure"
-        app:layout_constraintStart_toEndOf="@+id/text_rain_mm"
-        app:layout_constraintTop_toBottomOf="@+id/text_rain_mm"
         app:drawableTint="@color/amber_200"
+        app:drawableTopCompat="@drawable/ic_wind_direction"
+        app:layout_constraintStart_toEndOf="@+id/text_wind_speed"
+        app:layout_constraintTop_toTopOf="@+id/text_humidity"
         tools:text="NW" />
 
     <com.google.android.material.button.MaterialButton
@@ -104,13 +98,10 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/share"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_wind_speed" />
+        android:text="@string/share"
+        app:layout_constraintStart_toEndOf="@+id/image_weather_today"
+        app:layout_constraintTop_toBottomOf="@+id/text_main_info" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -128,6 +119,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
         android:indeterminateTint="@color/blue_700"/>
@@ -168,7 +160,7 @@
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_no_internet"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="imageView,textView2,text_no_internet" />
