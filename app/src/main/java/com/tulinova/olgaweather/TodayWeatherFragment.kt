@@ -10,21 +10,21 @@ import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.button.MaterialButton
-import com.tulinova.olgaweather.api.CustomError
-import com.tulinova.olgaweather.api.Status
+import com.tulinova.olgaweather.data.Status
 import com.tulinova.olgaweather.data.WeatherResponse
 import com.tulinova.olgaweather.utils.IconsUtil
 import com.tulinova.olgaweather.viewmodel.TodayWeatherViewModel
 import kotlin.math.roundToInt
 import androidx.appcompat.app.AppCompatActivity
-
-
-
-
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.tulinova.olgaweather.utils.WindUtils
+import com.tulinova.olgaweather.viewmodel.LocationViewModel
+import okhttp3.ResponseBody
 
 
 class TodayWeatherFragment : Fragment() {
+    private val model: TodayWeatherViewModel by activityViewModels()
+    private val locationModel: LocationViewModel by activityViewModels()
 
     private lateinit var humidityText: TextView
     private lateinit var rainLevelText: TextView
@@ -38,8 +38,7 @@ class TodayWeatherFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var mainInfoGroup: Group
     private lateinit var noInternetGroup: Group
-
-    private val model: TodayWeatherViewModel by activityViewModels()
+    private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,13 +56,25 @@ class TodayWeatherFragment : Fragment() {
         progressBar = rootView.findViewById(R.id.progressBar)
         mainInfoGroup = rootView.findViewById(R.id.group)
         noInternetGroup = rootView.findViewById(R.id.group_no_internet)
+        swipeContainer = rootView.findViewById(R.id.swipe_refresh_layout)
+        swipeContainer.setOnRefreshListener {
+            if (locationModel.locationData.value != null) {
+                model.getTodayWeather(
+                    locationModel.locationData.value!!.latitude,
+                    locationModel.locationData.value!!.longitude
+                )
+                mainInfoGroup.visibility = View.INVISIBLE
+            }
+        }
+        swipeContainer.setColorSchemeResources(R.color.blue_700)
 
         shareButton = rootView.findViewById(R.id.button_share)
         shareButton.setOnClickListener {
 
             val city = model.todayWeather.value?.data?.name ?: ""
             val temp = "${model.todayWeather.value?.data?.main?.temp?.roundToInt()} \u2103"
-            val description = model.todayWeather.value?.data?.weather?.getOrNull(0)?.description ?: ""
+            val description =
+                model.todayWeather.value?.data?.weather?.getOrNull(0)?.description ?: ""
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(
@@ -85,7 +96,10 @@ class TodayWeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //model.getTodayWeather(STUB_LATITUDE, STUB_LONGITUDE)
+        locationModel.locationData.observe(viewLifecycleOwner, {
+            model.getTodayWeather(it.latitude, it.longitude)
+        })
+
         model.todayWeather.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.LOADING -> showLoading()
@@ -96,65 +110,50 @@ class TodayWeatherFragment : Fragment() {
     }
 
     private fun showLoading() {
-        progressBar.visibility = View.VISIBLE
-        mainInfoGroup.visibility = View.GONE
+        if (!swipeContainer.isRefreshing) {
+            progressBar.visibility = View.VISIBLE
+            swipeContainer.visibility = View.GONE
+        }
         noInternetGroup.visibility = View.GONE
     }
 
     private fun showWeatherData(data: WeatherResponse?) {
         progressBar.visibility = View.GONE
+        swipeContainer.visibility = View.VISIBLE
+        swipeContainer.isRefreshing = false
         mainInfoGroup.visibility = View.VISIBLE
         noInternetGroup.visibility = View.GONE
+
 
         locationText.text = (data?.name + ", " + data?.sys?.country)
         mainInfoText.text =
             ("" + data?.main?.temp?.roundToInt() + "℃ | " + data?.weather?.getOrNull(0)?.main)
         humidityText.text = ("" + data?.main?.humidity + "%")
-        if(data?.rain?.rainIn3h != null) {
-            rainLevelText.text = ("${data.rain.rainIn3h} mm")
-        } else if(data?.rain?.rainIn1h != null) {
-            rainLevelText.text = ("${data.rain.rainIn1h} mm")
-        } else if (data?.snow?.snowIn1h != null) {
-            rainLevelText.text = ("" + data.snow.snowIn1h + "mm")
-        } else if(data?.snow?.snowIn3h != null) {
-            rainLevelText.text = ("" + data.snow.snowIn3h + "mm")
-        }  else {
-            rainLevelText.text = ("0 mm")
+        when {
+            data?.rain?.rainIn1h != null -> {
+                rainLevelText.text = ("${data.rain.rainIn1h} mm")
+            }
+            data?.rain?.rainIn3h != null -> {
+                rainLevelText.text = ("${data.rain.rainIn3h} mm")
+            }
+            data?.snow?.snowIn1h != null -> {
+                rainLevelText.text = ("" + data.snow.snowIn1h + "mm")
+            }
+            data?.snow?.snowIn3h != null -> {
+                rainLevelText.text = ("" + data.snow.snowIn3h + "mm")
+            }
+            else -> {
+                rainLevelText.text = ("0 mm")
+            }
         }
         pressureText.text = ("" + data?.main?.pressure + "hPa")
         windSpeedText.text = ("" + data?.wind?.speed + "m/s")
-        windDirectionText.text = (degToCompass(data?.wind?.deg ?: 0))
+        windDirectionText.text = (WindUtils.degToCompass(data?.wind?.deg ?: 0))
         weatherImage.setImageResource(IconsUtil.getIconResId(data?.weather?.getOrNull(0)?.icon))
-
-
     }
 
-    //TODO: replace this method outside of Fragment
-    private fun degToCompass(num: Int): String {
-        val index = (num / 22.5) + 0.5
-        val directions: Array<String> = arrayOf(
-            "N",
-            "NNE",
-            "NE",
-            "ENE",
-            "E",
-            "ESE",
-            "SE",
-            "SSE",
-            "S",
-            "SSW",
-            "SW",
-            "WSW",
-            "W",
-            "WNW",
-            "NW",
-            "NNW",
-            "N"
-        )
-        return directions[index.toInt()]
-    }
-
-    private fun showServerError(error: CustomError?) {
+    private fun showServerError(error: ResponseBody?) {
+        swipeContainer.isRefreshing = false
         progressBar.visibility = View.GONE
         mainInfoGroup.visibility = View.GONE
         noInternetGroup.visibility = View.VISIBLE

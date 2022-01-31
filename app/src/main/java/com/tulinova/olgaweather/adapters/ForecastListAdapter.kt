@@ -9,20 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tulinova.olgaweather.data.ForecastEntry
 import com.tulinova.olgaweather.utils.IconsUtil
 import com.tulinova.olgaweather.R
-import com.tulinova.olgaweather.data.ForecastResponse
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 private const val ITEM_VIEW_TYPE_HEADER = 1
 private const val ITEM_VIEW_TYPE_ITEM = 2
-private val timeFormatter: DateFormat = SimpleDateFormat("HH:mm")
-private val dayFormatter: DateFormat = SimpleDateFormat("MM/dd/yyyy")
+private val timeFormatter: DateFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+private val dayFormatter: DateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH)
 private val dayOfWeekFormatter : DateFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
 
 
@@ -32,7 +28,7 @@ class ForecastListAdapter(sourceList: List<ForecastEntry>) :
 
     init {
         val groupedList = sourceList.groupBy { dayFormatter.format(it.date) }
-        var myList = ArrayList<ForecastListItem>()
+        val myList = ArrayList<ForecastListItem>()
         for (i in groupedList.keys) {
             myList.add(ForecastListItem.DayHeader(i))
             for (v in groupedList.getValue(i)) {
@@ -67,7 +63,7 @@ class ForecastListAdapter(sourceList: List<ForecastEntry>) :
         when (holder) {
             is HeaderHolder -> {
                 val item = forecastList.get(position) as ForecastListItem.DayHeader
-                val date : Date = dayFormatter.parse(item.dayName)
+                val date : Date = dayFormatter.parse(item.dayName)?: Date()
                 holder.dayNameTextView.text = dayOfWeekFormatter.format(date)
             }
             is ForecastEntryHolder -> {
@@ -75,7 +71,8 @@ class ForecastListAdapter(sourceList: List<ForecastEntry>) :
                 holder.timeTextview.text = timeFormatter.format(item.forecastEntry.date)
                 holder.descriptionTextView.text =
                     item.forecastEntry.weather.getOrNull(0)?.description
-                holder.temperatureTextView.text = "${item.forecastEntry.main.temp.roundToInt()}℃"
+                val temperature = "${item.forecastEntry.main.temp.roundToInt()}℃"
+                holder.temperatureTextView.text = temperature
                 holder.weatherImageView.setImageResource(
                     IconsUtil.getIconResId(
                         item.forecastEntry.weather.getOrNull(

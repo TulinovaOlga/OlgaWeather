@@ -7,9 +7,10 @@
     <string name="no_internet_connection">Your network is unavailable. Check your data or wifi connection.</string>
     <string name="offline">Offline</string>
     <string name="turn_on_gps">Please Turn on GPS from settings</string>
-    <string name="no_location_permission">No permission granted</string>
-    <string name="location_permission_rationale">Please enable location. This is need for getting weather for your real location</string>
+    <string name="no_location_permission">No permission granted. Default location will be used.</string>
+    <string name="location_permission_rationale">Please allow geolocation. This is necessary to get the weather for your actual location</string>
     <string name="updateGPSstatus">UPDATE GPS STATUS!!!</string>
     <string name="today">Today</string>
     <string name="forecast">Forecast for 5 days</string>
+
 </resources>

@@ -36,5 +36,53 @@
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
         android:indeterminateTint="@color/blue_700"/>
+
+    <TextView
+        android:id="@+id/text_no_internet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_12"
+        android:maxLines="4"
+        android:minLines="1"
+        android:text="@string/no_internet_connection"
+        android:textColor="@color/blue_500"
+        android:textAlignment="textStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:padding="@dimen/padding_12"
+        android:src="@drawable/baseline_cloud_off_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue_700" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_12"
+        android:text="@string/offline"
+        android:textSize="25sp"
+        android:textColor="@color/blue_700"
+
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_no_internet"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="imageView,textView2,text_no_internet" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
